@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  flask:
+    build: .
+    container_name: tg_bot
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - 11539:11539

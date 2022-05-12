@@ -6,6 +6,12 @@ Use AES/CFB encrypt message.<br/>
 ![](./source/demo.png)
 
 # How To Create Your Own Bot
+If you know how to use docker, it is recommended that use 
+```
+docker-compose up
+```
+on the premise that you have filled in the config.yml
+
 1. Apply to "BotFather" for your bot token
 
 1. write config.yml
