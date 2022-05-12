@@ -38,7 +38,8 @@ class Roykesistant:
         self.updater = Updater(token=self.token, use_context=True)
         self.dispatcher = self.updater.dispatcher
 
-        self.dispatcher.add_handler(CommandHandler("start", self.start))
+        self.dispatcher.add_handler(CommandHandler("subscribe", self.subscribe))
+        self.dispatcher.add_handler(CommandHandler("help", self.help))
 
         """
         Startup the bot
@@ -50,7 +51,13 @@ class Roykesistant:
             return True
         return False
 
-    def start(self, update: Update, context: CallbackContext):
+    def help(self, update: Update, context: CallbackContext):
+        update.message.reply_text(
+            text="help - View all instruction descriptions.\n\n\
+subscribe - If you subscribe, you can receive messages from the bot broadcast to all subscribed users until the bot shuts down."
+        )
+
+    def subscribe(self, update: Update, context: CallbackContext):
         """
         If the person who sent the message is on the whitelist,
         Add chat id to chat_list as a member who receives messages from the bot
@@ -61,14 +68,14 @@ class Roykesistant:
         chat_id = sender_data["id"]
 
         if not self.is_legal_user(username):
-            update.message.reply_text(text="permission denied")
+            update.message.reply_text(text="Permission denied")
             return
 
         if (username, chat_id) not in self.chat_list:
             self.chat_list.append((username, chat_id))
 
         update.message.reply_text(
-            text=f"Hi! {sender_data['first_name']} {sender_data['last_name']}"
+            text=f"Subscribe Success!\n{sender_data['first_name']} {sender_data['last_name']}"
         )
 
     def shutdown(self):
