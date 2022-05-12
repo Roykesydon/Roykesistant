@@ -27,14 +27,14 @@ Use AES/CFB encrypt message.<br/>
     ```
 
 # API
-`POST` /send
+- `POST` /send
 
-- Parameters
+    - Parameters
 
-    name | info
-    -- | --
-    iv | AES initial vector
-    encrypted_message | encrypted < message and timestamp >
+        name | info
+        -- | --
+        iv | AES initial vector
+        encrypted_message | encrypted < message and timestamp >
 
 
 # Note 
