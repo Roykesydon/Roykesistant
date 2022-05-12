@@ -5,7 +5,7 @@ Use AES/CFB encrypt message.<br/>
 
 ![](./source/demo.png)
 
-# How To Create your own bot
+# How To Create Your Own Bot
 1. Apply to "BotFather" for your bot token
 
 1. write config.yml
