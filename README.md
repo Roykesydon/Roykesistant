@@ -5,7 +5,7 @@ Use AES/CFB encrypt message.<br/>
 
 ![](./source/demo.png)
 
-# How To Use
+# How To Create Your Own Bot
 1. Apply to "BotFather" for your bot token
 
 1. write config.yml
@@ -27,14 +27,14 @@ Use AES/CFB encrypt message.<br/>
     ```
 
 # API
-`POST` /send
+- `POST` /send
 
-- Parameters
+    - Parameters
 
-    name | info
-    -- | --
-    iv | AES initial vector
-    encrypted_message | encrypted < message and timestamp >
+        name | info
+        -- | --
+        iv | AES initial vector
+        encrypted_message | encrypted < message and timestamp >
 
 
 # Note 
@@ -42,6 +42,9 @@ Use AES/CFB encrypt message.<br/>
 
     you can use
     ```python
+    from utils.SecurityGuard import SecurityGuard
+    
+    security_guard = SecurityGuard()
     iv, encypt_message = security_guard.encrypt_message(<msg>, <key>)
     ```
     to get these parameters
