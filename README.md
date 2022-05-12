@@ -42,6 +42,9 @@ Use AES/CFB encrypt message.<br/>
 
     you can use
     ```python
+    from utils.SecurityGuard import SecurityGuard
+    
+    security_guard = SecurityGuard()
     iv, encypt_message = security_guard.encrypt_message(<msg>, <key>)
     ```
     to get these parameters
