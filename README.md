@@ -6,11 +6,6 @@ Use AES/CFB encrypt message.<br/>
 ![](./source/demo.png)
 
 # How To Create Your Own Bot
-If you know how to use docker, it is recommended that use 
-```
-docker-compose up
-```
-on the premise that you have filled in the config.yml
 
 1. Apply to "BotFather" for your bot token
 
@@ -22,15 +17,26 @@ on the premise that you have filled in the config.yml
     - AES key
         - You can use "generate_key.py" to generate your own key
 
+1. write .env
+    - DB_USERNAME: root's username
+    - DB_PASSWORD: root's password
+    
 
 
 2. ```bat
-    pipenv install
+    docker-compose up -d
     ```
 
-3. ```bat
-    pipenv run python main.py
-    ```
+## How to Shut down
+```
+docker-compose down
+```
+
+
+# Port
+- flask : 11539
+- mongodb : 27017
+- mongo-express : 8081
 
 # API
 - `POST` /send
@@ -48,7 +54,7 @@ on the premise that you have filled in the config.yml
 
     you can use
     ```python
-    from utils.SecurityGuard import SecurityGuard
+    from utils.security_guard import SecurityGuard
     
     security_guard = SecurityGuard()
     iv, encypt_message = security_guard.encrypt_message(<msg>, <key>)

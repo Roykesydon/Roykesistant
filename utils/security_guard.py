@@ -1,6 +1,7 @@
 import base64
 import string
 import time
+from datetime import datetime
 
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
@@ -70,6 +71,7 @@ class SecurityGuard:
         """
         return_msg = {"success": False, "msg": "", "data": ""}
         current_timestamp = time.time()
+        
         try:
             message_with_timestamp = self.__decrypt(
                 base_64_iv, base64_ciphered_meesage, base64_key

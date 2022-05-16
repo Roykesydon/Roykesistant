@@ -9,3 +9,46 @@ services:
       - .:/app
     ports:
       - 11539:11539
+    networks: 
+      - tg-bot-network
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:4.2.12
+    container_name: tg-bot-mongodb
+    restart: always
+    networks: 
+      - tg-bot-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME} 
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 27017:27017
+    volumes: 
+      - mongodata:/data/db
+  
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    networks: 
+      - tg-bot-network
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USERNAME} 
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD}
+      ME_CONFIG_MONGODB_SERVER: mongodb 
+      ME_CONFIG_BASICAUTH_USERNAME: ${DB_USERNAME} 
+      ME_CONFIG_BASICAUTH_PASSWORD: ${DB_PASSWORD}
+
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodata:
+
+networks:
+  tg-bot-network:
+    driver: bridge

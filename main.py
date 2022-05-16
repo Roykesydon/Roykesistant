@@ -2,7 +2,7 @@ from flask import Flask, request
 
 from tg_bot.core import Roykesistant
 from utils.config import get_config
-from utils.SecurityGuard import SecurityGuard
+from utils.security_guard import SecurityGuard
 
 app = Flask(__name__)
 

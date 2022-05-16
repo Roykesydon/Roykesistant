@@ -1,3 +1,3 @@
-from utils.SecurityGuard import SecurityGuard
+from utils.security_guard import SecurityGuard
 
 print(SecurityGuard().generate_key())
