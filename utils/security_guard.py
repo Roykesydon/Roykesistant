@@ -71,7 +71,7 @@ class SecurityGuard:
         """
         return_msg = {"success": False, "msg": "", "data": ""}
         current_timestamp = time.time()
-        
+
         try:
             message_with_timestamp = self.__decrypt(
                 base_64_iv, base64_ciphered_meesage, base64_key

@@ -28,8 +28,9 @@ def send():
             return return_msg
 
         try:
-            tg_bot.send_message(result["data"])
-        except:
+            tg_bot.send_message_to_subscribers(result["data"])
+        except Exception as error:
+            print(error, flush=True)
             return_msg["msg"] = "can't send message"
             return return_msg
 

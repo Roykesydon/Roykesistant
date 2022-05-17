@@ -1,9 +1,11 @@
 # Introduction
 A simple telegram bot with flask.<br/>
 
+At present, it is mainly used to receive abnormal messages sent by the service and forward the messages to users.<br/>
+
 Use AES/CFB encrypt message.<br/>
 
-![](./source/demo.png)
+![](./source/demo.gif)
 
 # How To Create Your Own Bot
 

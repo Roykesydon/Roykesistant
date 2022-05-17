@@ -49,19 +49,9 @@ class Roykesistant:
         """
         Notify all subscribers that the service has just restarted
         """
-
-        """
-        Get connection with subscribers
-        """
-        client = get_connection()
-        db = client["telegram_bot_db"]
-        subscribers_collection = db["subscriber"]
-
-        for subscriber_data in subscribers_collection.find():
-            chat_id = subscriber_data["chat_id"]
-            self.dispatcher.bot.send_message(
-                chat_id=f"{chat_id}", text="The service has just restarted"
-            )
+        self.send_message_to_subscribers(
+            "The service has just restarted", error_message=False
+        )
 
     def is_legal_user(self, username: str) -> bool:
         if username in self.config["username_white_list"]:
@@ -117,20 +107,13 @@ subscribe - If you subscribe, you can receive messages from the bot broadcast to
         )
 
     def shutdown(self) -> None:
-        """
-        Get connection with subscribers
-        """
-        client = get_connection()
-        db = client["telegram_bot_db"]
-        subscribers_collection = db["subscriber"]
+        self.send_message_to_subscribers(
+            "The bot is going to shut down", error_message=False
+        )
 
-        for subscriber_data in subscribers_collection.find():
-            chat_id = subscriber_data["chat_id"]
-            self.dispatcher.bot.send_message(
-                chat_id=f"{chat_id}", text="The bot is going to shut down"
-            )
-
-    def send_message(self, message: str, usernames: List[str] = None) -> None:
+    def send_message_to_subscribers(
+        self, message: str, error_message=True, usernames: List[str] = None
+    ) -> None:
         """
         Send a message to all chats in chat_list.
         If there are specific usernames, send a message to them instead of all users in chat_list.
@@ -143,6 +126,16 @@ subscribe - If you subscribe, you can receive messages from the bot broadcast to
         db = client["telegram_bot_db"]
         subscribers_collection = db["subscriber"]
 
+        if error_message:
+            system_error_banner = open("./source/system_error.mp4", "rb").read()
+
         for subscriber_data in subscribers_collection.find():
             chat_id = subscriber_data["chat_id"]
+
+            """
+            If is error kind of message, send error banner to chat
+            """
+            if error_message:
+                self.dispatcher.bot.send_video(f"{chat_id}", system_error_banner)
+
             self.dispatcher.bot.send_message(chat_id=f"{chat_id}", text=message)
