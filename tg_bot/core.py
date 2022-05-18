@@ -128,6 +128,7 @@ subscribe - If you subscribe, you can receive messages from the bot broadcast to
 
         if error_message:
             system_error_banner = open("./source/system_error.mp4", "rb").read()
+            message = "⚠ " + message + " ⚠"
 
         for subscriber_data in subscribers_collection.find():
             chat_id = subscriber_data["chat_id"]
